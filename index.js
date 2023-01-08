@@ -1,7 +1,17 @@
 import GDriveUploader from "./gdrive-upload.js";
 import { Telegraf } from "telegraf";
+import * as dotenv from 'dotenv';
+dotenv.config()
 
-const bot = new Telegraf("1475260552:AAH7xHlLIWb7j_R_sb5sb1uxcSTCuslVIX4");
+const BOT_TOKEN = process.env.BOT_TOKEN;
+const G_DRIVE_FOLDER_ID = process.env.G_DRIVE_FOLDER_ID;
+const G_DRIVE_CREDS = JSON.parse(process.env.CREDS);
+if (!BOT_TOKEN || !G_DRIVE_FOLDER_ID || !G_DRIVE_CREDS) {
+    console.log("Please set the required environment variables.");
+    process.exit(1);
+}
+
+const bot = new Telegraf(BOT_TOKEN);
 const uploadQueue = {};
 
 // Handler Functions
@@ -67,7 +77,7 @@ async function uploadHandler(ctx) {
     }, 2000);
 
     // upload file
-    const uploader = new GDriveUploader();
+    const uploader = new GDriveUploader(G_DRIVE_CREDS, G_DRIVE_FOLDER_ID);
     uploader.upload(fileUrl, {
         fileName: fileName,
         fileType: fileType,

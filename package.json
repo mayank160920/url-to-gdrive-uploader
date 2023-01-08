@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.0.3",
     "googleapis": "^110.0.0",
     "mime-types": "^2.1.35",
     "node-fetch": "^3.3.0",

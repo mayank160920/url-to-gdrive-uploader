@@ -8,19 +8,17 @@ import * as fs from "fs";
 class GDriveUploader {
     // consts and vars
     DOWNLOAD_DIR = "./downloads";
-    G_DRIVE_FOLDER_ID = process.env.G_DRIVE_FOLDER_ID || "1tR0r3gEMsACD6WPeuubupfxOgB9gA5mz";
     DESCRIPTION = "Uploaded By Gdrive-Uploader";
     SCOPES = ["https://www.googleapis.com/auth/drive"];
+    G_DRIVE_FOLDER_ID;
     auth;
     drive;
 
-    constructor() {
-        if (process.env.CREDS) {            
-            this.auth = new google.auth.GoogleAuth({ credentials: JSON.parse(process.env.CREDS), scopes: this.SCOPES });
-        } else {
-            this.auth = new google.auth.GoogleAuth({ keyFile: "creds.json", scopes: this.SCOPES });
-        }
+    constructor(creds,folderId) {
+        this.auth = new google.auth.GoogleAuth({ credentials: creds, scopes: this.SCOPES });
+        // this.auth = new google.auth.GoogleAuth({ keyFile: "creds.json", scopes: this.SCOPES });
         this.drive = google.drive({ version: "v3", auth: this.auth });
+        this.G_DRIVE_FOLDER_ID = folderId;
     }
 
     // get local file path from file name

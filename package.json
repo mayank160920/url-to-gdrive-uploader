@@ -1,0 +1,20 @@
+{
+  "name": "gdrive-remote-uploader",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "googleapis": "^110.0.0",
+    "mime-types": "^2.1.35",
+    "node-fetch": "^3.3.0",
+    "telegraf": "^4.11.2",
+    "webtorrent": "^1.9.6"
+  }
+}
